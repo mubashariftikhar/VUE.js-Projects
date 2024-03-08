@@ -40,7 +40,8 @@ export default {
   },
   methods: {
     getWeather() {
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=cbc42ca72b55a7ab341f9b53e0e7361c`)
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=cbc42ca72b55a7ab341f9b53e0e7361c
+      `)
         .then(response => {
           if (!response.ok) {
             throw new Error('City not found!');
