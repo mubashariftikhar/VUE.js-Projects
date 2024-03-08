@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- Header Section -->
     <header>
       <div class="header-container">
         <h1>{{ fullName }}</h1>
@@ -8,82 +7,54 @@
           <ul>
             <li><a href="#about">About</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </nav>
       </div>
     </header>
     
-    <!-- About Section -->
-    <section id="about" class="section">
-      <div class="container">
-        <h2>About Me</h2>
-        <div class="about-content">
-          <img src="profile-pic.jpg" alt="Profile Picture" class="profile-pic">
-          <p>{{ aboutContent }}</p>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="section">
-      <div class="container">
-        <h2>Portfolio</h2>
-        <div class="projects">
-          <div v-for="project in projects" :key="project.id" class="project">
-            <h3>{{ project.title }}</h3>
-            <p>{{ project.description }}</p>
-            <a :href="project.link">View Project</a>
+    <main>
+      <section id="about" class="section">
+        <div class="container">
+          <h2>About Me</h2>
+          <div class="about-content">
+            <img src="profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+            <p>{{ aboutContent }}</p>
           </div>
         </div>
-      </div>
-    </section>
-    
-    <!-- Skills Section -->
-    <section id="skills" class="section">
-      <div class="container">
-        <h2>Skills</h2>
-        <div class="skills">
-          <div v-for="(skill, index) in skills" :key="index" class="skill">
-            <h3>{{ skill.name }}</h3>
-            <div class="skill-level" :style="{ width: skill.level + '%' }"></div>
+      </section>
+      
+      <section id="portfolio" class="section">
+        <div class="container">
+          <h2>Portfolio</h2>
+          <div class="projects">
+            <div v-for="project in projects" :key="project.id" class="project">
+              <div class="project-content">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description }}</p>
+                <a :href="project.link">View Project</a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-    
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="section">
-      <div class="container">
-        <h2>Testimonials</h2>
-        <div class="testimonials">
-          <div v-for="(testimonial, index) in testimonials" :key="index" class="testimonial">
-            <p>{{ testimonial.content }}</p>
-            <span>- {{ testimonial.author }}</span>
-          </div>
+      </section>
+      
+      <section id="contact" class="section">
+        <div class="container">
+          <h2>Contact Me</h2>
+          <form @submit.prevent="submitForm" class="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" v-model="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" v-model="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" v-model="message" required></textarea>
+            <button type="submit">Submit</button>
+          </form>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
     
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-      <div class="container">
-        <h2>Contact Me</h2>
-        <form @submit.prevent="submitForm" class="contact-form">
-          <label for="name">Name:</label>
-          <input type="text" id="name" v-model="name" required>
-          <label for="email">Email:</label>
-          <input type="email" id="email" v-model="email" required>
-          <label for="message">Message:</label>
-          <textarea id="message" v-model="message" required></textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </section>
-    
-    <!-- Footer Section -->
     <footer>
       <p>&copy; {{ currentYear }} {{ fullName }} - All Rights Reserved</p>
     </footer>
@@ -111,17 +82,6 @@ export default {
         },
         // Add more projects as needed
       ],
-      skills: [
-        { name: "HTML", level: 90 },
-        { name: "CSS", level: 85 },
-        { name: "JavaScript", level: 80 },
-        // Add more skills as needed
-      ],
-      testimonials: [
-        { content: "Testimonial 1 content", author: "Testimonial 1 author" },
-        { content: "Testimonial 2 content", author: "Testimonial 2 author" },
-        // Add more testimonials as needed
-      ],
       name: "",
       email: "",
       message: ""
@@ -144,7 +104,6 @@ export default {
 <style scoped>
 /* Add your CSS styles here */
 
-/* General styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -161,16 +120,10 @@ body {
   padding: 50px 0;
 }
 
-/* Header styles */
 header {
   background-color: #333;
   color: #fff;
   padding: 20px 0;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1000;
 }
 
 .header-container {
@@ -195,12 +148,10 @@ nav ul li a {
   text-decoration: none;
 }
 
-/* Main styles */
 main {
   padding-top: 80px; /* Adjust based on header height */
 }
 
-/* About Section styles */
 .about-content {
   display: flex;
   align-items: center;
@@ -212,7 +163,6 @@ main {
   margin-right: 20px;
 }
 
-/* Portfolio Section styles */
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -220,47 +170,35 @@ main {
 }
 
 .project {
-  background-color: #f4f4f4;
+  background-color: #fff;
   padding: 20px;
   border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-/* Skills Section styles */
-.skills {
-  display: flex;
-  flex-wrap: wrap;
+.project:hover {
+  transform: translateY(-5px); /* Add a subtle hover effect */
 }
 
-.skill {
-  flex: 1 1 200px;
-  margin: 10px;
-}
-
-.skill h3 {
+.project h3 {
   margin: 0;
 }
 
-.skill-level {
-  background-color: #007bff; /* Change color based on skill level */
-  height: 20px;
-  border-radius: 5px;
+.project p {
+  margin-bottom: 10px;
 }
 
-/* Testimonials Section styles */
-.testimonials {
-  display: flex;
-  flex-wrap: wrap;
+.project a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.testimonial {
-  flex: 1 1 400px;
-  padding: 20px;
-  background-color: #f4f4f4;
-  border-radius: 5px;
-  margin: 10px;
+.project a:hover {
+  color: #007bff; /* Change color on hover */
 }
 
-/* Contact Section styles */
 .contact-form {
   max-width: 400px;
   margin: 0 auto;
@@ -295,14 +233,10 @@ main {
   background-color: #555;
 }
 
-/* Footer styles */
 footer {
   background-color: #333;
   color: #fff;
   text-align: center;
   padding: 20px 0;
-  position: relative;
-  bottom: 0;
-  width: 100%;
 }
 </style>
